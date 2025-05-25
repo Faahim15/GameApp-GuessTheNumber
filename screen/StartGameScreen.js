@@ -1,7 +1,10 @@
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, TextInput, View, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
-
+import Titles from "../components/ui/Titles";
+import Colors from "../constant/colors";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 const StartGameScreen = ({ onPickNumber }) => {
   const [enteredNumber, setEnteredNumber] = useState("");
   function numberInputHandler(enteredInputText) {
@@ -23,20 +26,25 @@ const StartGameScreen = ({ onPickNumber }) => {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        maxLength={2}
-        style={styles.numberInput}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        valule={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={{ flexDirection: "row" }}>
-        <PrimaryButton>Reset</PrimaryButton>
-        <PrimaryButton onPress={confirmNumberHandler}>Confirm</PrimaryButton>
-      </View>
+    <View style={styles.rootContainer}>
+      <Titles>Guess My Number</Titles>
+
+      <Card>
+        <InstructionText>Enter a number</InstructionText>
+        <TextInput
+          maxLength={2}
+          style={styles.numberInput}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          valule={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
+        <View style={{ flexDirection: "row" }}>
+          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={confirmNumberHandler}>Confirm</PrimaryButton>
+        </View>
+      </Card>
     </View>
   );
 };
@@ -44,15 +52,12 @@ const StartGameScreen = ({ onPickNumber }) => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
+  rootContainer: {
+    flex: 1,
     marginTop: 100,
     padding: 16,
-    marginHorizontal: 16,
-    borderRadius: 8,
-    backgroundColor: "#72063c", //72063c
-    elevation: 8,
-    alignItems: "center",
   },
+
   numberInput: {
     height: 50,
     width: 50,
